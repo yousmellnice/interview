@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const vnode = {
+      tag: 'DIV',
+      attrs: {
+        id: 'app'
+      },
+      children: [{
+        tag: 'SPAN',
+        children: [{
+          tag: 'A',
+          children: []
+        }]
+      },{
+        tag: 'SPAN',
+        children: [{
+          tag: 'A',
+          children: []
+        },{
+          tag: 'A',
+          children: []
+        }]
+      }]
+    }
+    const render = vnode => {
+      if (typeof vnode === 'number') {
+        return vnode = String(vnode)
+      }
+      // 如果是字符串则直接innerText
+      if (typeof vnode === 'string') {
+        return document.createTextNode(vnode)
+      }
+      // 创建元素
+      const element = document.createElement(vnode.tag)
+      // 如果存在属性时
+      if (vnode.attrs) {
+        Object.keys(vnode.attrs).forEach(attrKey => {
+          // 逐个添加属性值
+          element.setAttribute(attrKey, vnode.attrs[attrKey])
+        })
+      }
+      // 如果存在子节点的时候
+      if (vnode.children) {
+        vnode.children.forEach(childNode => {
+          // 需要注意的是 这里插入的子节点是真实DOM 并不是虚拟DOM
+          element.appendChild(render(childNode))
+        })
+      }
+      return element
+    }
+    console.log(render(vnode))
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>test</title>
+</head>
+
+<body>
+  <button id="click">click</button>
+
+  <script>
+    !function () {
+      function Test() {
+        this.init()
+      }
+      Test.prototype.init = function () {
+        this.a = new Array(10000).fill('isboyjc')
+        console.log(this)
+      }
+
+      document.querySelector('#click').onclick = function () {
+        new Test();
+      }
+    }()
+  </script>
+</body>
+
+</html>

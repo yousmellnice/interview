@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // const arr = [1, [2, 3, [4, 5]]]
+    // const arr_ = [[0, 1], [2, 3], [4,[5,6,7]]]
+
+    // 方法一 reduce 递归
+    function flatten(arr) {
+      return arr.reduce((result, item) => {
+        return result.concat(Array.isArray(item) ? flatten(item) : item)
+      }, [])
+    }
+
+    // console.log(flatten(arr_))
+
+    // 用reduce的使用 求最大值
+    // function getMax(arr) {
+    //   return arr.reduce((pre, next) => {
+    //     return Math.max(pre, next)
+    //   }, [])
+    // }
+    // console.log(getMax(flatten(arr)))
+
+
+    // 方法二 数组的toString转为字符转 再通过split 字符串切割数组
+    // function flatten(arr) {
+    //   return arr.toString().split(',').map(e => {
+    //     return +e
+    //   })
+    // }
+
+    // 方法三 join将数组转成字符串 再用过split切割成数组
+    // function flatten(arr) {
+    //   return arr.join(',').split(',').map(e => {
+    //     return parseInt(e)
+    //   })
+    // }
+
+    // console.log(flatten(arr_))
+
+    // 方法四 通过自定义方法递归遍历
+    // function flatten(arr) {
+    //   let _arr = []
+    //   arr.map(item => {
+    //     if(Array.isArray(item)) {
+    //       _arr = _arr.concat(flatten(item))
+    //     }else {
+    //       _arr.push(item)
+    //     }
+    //   })
+    //   return _arr
+    // }
+    // console.log(flatten(arr_))
+
+
+    // 核心思路是通过遍历数组 如果arr[i] 为数组则继续递归遍历 如果不是则concat之前的结果
+    
+
+  </script>
+</body>
+</html>

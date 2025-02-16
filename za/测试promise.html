@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="change()">点击</button>
+  <input type="text" id="input" oninput="changeInput()">
+  <script>
+    function change() {
+      console.log(1)
+    }
+    const target = document.querySelector('#input')
+    function changeInput() {
+      var flag = target.value
+      const p1 = function() {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve()
+          }, 300)
+        })
+      }
+      const value = flag
+      p1().then( ()=> {
+        console.log(flag === value)
+      })
+    }
+    // let value = 'ysn'
+    // const p1 = function() {
+    //   return new Promise(resolve => {
+    //     value = 'ysn1'
+    //     const _value = value
+    //     resolve()
+    //   })
+    // }
+    // const p2 = new Promise(resolve => {
+    //   value = 'ysn2'
+    //   resolve()
+    // })
+    // p1().then(() => {
+    //   console.log(value)
+    // })
+    // p2.then(() => {
+    //   console.log(value)
+    // })
+
+  </script>
+</body>
+</html>

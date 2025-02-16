@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const render = (key, value) => {
+      console.log(`SET key: ${key} , value: ${value}`)
+    }
+    const defineReactive = (obj, key, val) => {
+      reactive(val)
+      Object.defineProperty(obj, key, {
+        get() {
+          return val
+        },
+        set(newVal) {
+          if (val === newVal) {
+            // 模拟diff 
+            return
+          }
+          // 找到有更新的值进行修改视图
+          val = newVal
+          render(key, val)
+        }
+      })
+    }
+    const reactive = obj => {
+      // 作为一个递归的条件
+      // 如果是一个对象则继续递归查找
+      if (typeof obj === 'object') {
+        for(const key in obj) {
+          defineReactive(obj, key, obj[key])
+        }
+      }
+    }
+    // const deepSet = (obj, key, val) => {
+    //   Object.defineProperty(obj, key, {
+    //     get() {
+    //       return val
+    //     },
+    //     set(newV) {
+    //       val = newV
+    //     }
+    //   })
+    // }
+    const obj = {
+      a: '1',
+      b: {
+        b1: '2',
+        b2: {
+          b21: '3'
+        }
+      },
+      c: '4',
+      d: {
+        d1: '5'
+      }
+    }
+    reactive(obj)
+    obj.a = '2'
+    obj.b.b1 = '4'
+    obj.c = '4'
+    // deepSet(obj, 'e', '4')
+    obj.e = '3'
+  </script>
+</body>
+</html>

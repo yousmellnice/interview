@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let time = null
+    let num = 0
+    function mockInterval(fn, delay, ...arg) {
+      function recursion() {
+        time = setTimeout((name) => {
+          fn.call(this, arg)
+          recursion()
+        }, delay)
+      }
+      recursion()
+    }
+    function clearMockInterval(time) {
+      clearTimeout(time)
+    }
+    mockInterval(() => {
+      console.log(++num)
+    }, 1000)
+
+    setTimeout(() => {
+      clearMockInterval(time)
+    }, 5000)
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        display: flex;
+        width: 200px;
+        height: 200px;
+        border: 1px solid #ccc;
+        overflow-x: hidden;
+        transition: scrollLeft 1s ease-in-out;
+      }
+
+      #content {
+        width: 400px;
+        flex: 0 0 auto;
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="content">Click the button to slide right啊实打实大师大是的撒大萨达撒大萨达撒大萨达撒大萨达撒大萨达撒大萨达!1111</div>
+      <div id="content">Click the button to slide right啊实打实大师大是的撒大萨达撒大萨达撒大萨达撒大萨达撒大萨达撒大萨达!2222</div>
+      <div id="content">Click the button to slide right啊实打实大师大是的撒大萨达撒大萨达撒大萨达撒大萨达撒大萨达撒大萨达!3333</div>
+      <div id="content">Click the button to slide right啊实打实大师大是的撒大萨达撒大萨达撒大萨达撒大萨达撒大萨达撒大萨达!4444</div>
+    </div>
+
+    <button id="left" type="button">Slide left</button>
+    <button id="right" type="button">Slide right</button>
+    <button id="get" type="button">get</button>
+  </body>
+  <script>
+    const left = document.getElementById('left');
+    const right = document.getElementById('right');
+    const get = document.getElementById('get');
+
+    left.onclick = function () {
+        document.getElementById('container').scrollLeft -= 100;
+    };
+    right.onclick = function () {
+        document.getElementById('container').scrollLeft += 100;
+    };
+    get.onclick = function () {
+        console.log(document.getElementById('content').clientLeft);;
+    };
+  </script>
+</html>

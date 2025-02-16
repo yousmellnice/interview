@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const render = (methods, ...arg) => {
+      console.log(`methods: ${methods}, arguments: ${arg.join(',')}`)
+    }
+    // 保存数组的原型方法
+    const arrayPrototype = Array.prototype
+    // 创建新的数组方法
+    const newArrayPrototype = Object.create(arrayPrototype)
+    // 数组的方法
+    const arrMethods = ['push', 'pop', 'shift', 'unshift', 'sort', 'splice', 'reverse']
+
+    arrMethods.forEach(methodName => {
+      newArrayPrototype[methodName] = function() {
+        // 执行原有的数组方法
+        arrayPrototype[methodName].call(this, ...arguments)
+        // 触发渲染
+        render(methodName, ...arguments)
+      }
+    })
+
+    const reactive = (obj) => {
+      if (Array.isArray(obj)) {
+        obj.__proto__ = newArrayPrototype
+      }
+    }
+    const arr = [1, 2, 3, 4]
+    reactive(arr)
+    arr.push(5, 2)
+  </script>
+</body>
+</html>

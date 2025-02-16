@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const obj = {
+      name: 'ysn',
+      son: [1, 2]
+    }
+    const obj1 = {
+      name: 'ysn',
+      son: [1, 2],
+      love: {
+        name: 'hhh'
+      }
+    }
+    const _obj1 = Object.assign({}, obj1)
+    _obj1.love.name = 'yyy'
+    console.log(_obj1.love.name, obj1.love.name)
+
+    // 结论  对象、数组等复杂数据类型是无法通过 == 或者 === 去判断是否相等，因为在js中，复杂数据类型是储存在栈地址，栈地址中储存的是指针，通过这个指针指向堆地址中的数据。
+  </script>
+</body>
+</html>

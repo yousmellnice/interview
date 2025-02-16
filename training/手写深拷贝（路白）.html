@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 通过 JSON.parse 实现的深拷贝 拷贝不了日期对象、函数方法、undefined、error对象，序列化会使它们丢失
+    function deepClone(obj, hash = new WeakMap()) {
+      if (obj === null) {
+        return null
+      }
+      // 如果是时间类型
+      if (obj instanceof Date) {
+        return new Date(obj)
+      }
+      // 如果是正则类型
+      if (obj instanceof RegExp) {
+        return new RegExp(obj)
+      }
+      // 如果不是对象则是基本数据类型 可以直接返回
+      if (typeof obj !== 'object') {
+        return obj
+      }
+      // 考虑到循环引用的情况 防止嵌套引用自己的情况
+      // 直接通过 WeakMap 弱引用存起来 这里用到弱引用的原因是防止造成内存泄露 如果没用到则会进行垃圾回收
+      // 如有发现循环引用 则直接调用
+      if (hash.has(obj)) {
+        return hash.get(obj)
+      }
+      
+      const resultObj = Array.isArray(obj) ? [] : {}
+      hash.set(obj, resultObj)
+
+      Reflect.ownKeys(obj).forEach(key => {
+        resultObj[key] = deepClone(obj[key], hash)
+      })
+      return resultObj
+    }
+    // const obj = {
+    //   date: new Date('2021-11-12'),
+    //   name: function() {
+    //     console.log('hello');
+    //   },
+    //   arr: [1, 2, 3],
+    //   null: null,
+    //   under: undefined
+    // }
+    // const _obj = deepClone(obj)
+    // obj.arr[0] = 4
+    // console.log(obj);
+    // console.log(_obj);
+
+    // console.log({} instanceof Object);
+    // console.log([] instanceof Object);
+    // console.log([].__proto__.__proto__.constructor);
+  </script>
+</body>
+</html>

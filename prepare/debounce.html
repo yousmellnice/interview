@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <form>
+      <input type="file" id="file-input" name="fileContent">
+    </form>
+  </div>
+  <script>
+
+    // function debounce(fun, delay) {
+    //   let timeout = null
+    //   return function() {
+    //     // 立即触发
+    //     if (!timeout) {
+    //       fun.call(this, arguments)
+    //     }
+    //     clearTimeout(timeout)
+    //     timeout = setTimeout(() => {
+    //       fun.call(this, arguments)
+    //     }, delay);
+    //   }
+    // }
+    function test() {
+      console.log(1)
+    }
+    // window.onmousemove = debounce(test, 1000)
+
+    // function debounce(fun, delay, immediately = false) {
+    //   let timeout = null
+    //   return function() {
+    //     if (!timeout) {
+    //       fun.call(this, arguments)
+    //     }
+    //     clearTimeout(timeout)
+    //     timeout = setTimeout(() => {
+    //       fun.call(this, arguments)
+    //       timeout = null
+    //     }, delay)
+    //   }
+    // }
+    // window.onmousemove = debounce(test, 1000)
+
+    // function throttle(fun, delay) {
+    //   let timeout = null
+    //   let last = null
+    //   return function() {
+    //     const _this = this
+    //     const now = +new Date()
+    //     if (now - last >= delay) {
+    //       last = now
+    //       fun.call(_this, arguments)
+    //     } else {
+    //       clearTimeout(timeout)
+    //       timeout = setTimeout(() => {
+    //         fun.call(_this, arguments)
+    //       }, delay)
+    //     }
+    //   }
+    // }
+    // window.onmousemove = throttle(test, 1000)
+
+    // function throttle(fun, delay) {
+    //   let last = null
+    //   let timeout = null
+    //   return function() {
+    //     const _this = this
+    //     const now = Date.now()
+    //     if (now - last >= delay) {
+    //       last = Date.now()
+    //       fun.call(_this, arguments)
+    //     } else {
+    //       clearTimeout(timeout)
+    //       timeout = setTimeout(() => {
+    //         fun.call(_this, arguments)
+    //       }, delay)
+    //     }
+    //   }
+    // }
+
+    // function debounce(fun, delay) {
+    //   let timeout = null
+    //   return function () {
+    //     const _this = this
+    //     if (!timeout) {
+    //       fun.call(_this, arguments)
+    //     }
+    //     clearTimeout(timeout)
+    //     timeout = setTimeout(() => {
+    //       fun.call(_this, arguments)
+    //       timeout = null
+    //     }, delay)
+    //   }
+    // }
+    // window.onmousemove = debounce(test, 1000)
+
+    // function throttle(fun, delay) {
+    //   let timeout = null
+    //   let last = null
+    //   return function () {
+    //     const _this = this
+    //     const now = Date.now()
+    //     if (now - last >= delay) {
+    //       fun.call(_this, arguments)
+    //       last = Date.now()
+    //     } else {
+    //       clearTimeout(timeout)
+    //       timeout = setTimeout(() => {
+    //         fun.call(_this, arguments)
+    //       }, delay)
+    //     }
+    //   }
+    // }
+    // window.onmousemove = throttle(test, 1000)
+
+    // function throttle(fun, delay) {
+    //   let timeout = null
+    //   let last = null
+    //   return function() {
+    //     const _this = this
+    //     // if (!last && immediately) {
+    //     //   fun.call(_this, arguments)
+    //     // }
+    //     const now = Date.now()
+    //     if (now - last >= delay) {
+    //       fun.call(_this, arguments)
+    //       last = Date.now()
+    //     } else {
+    //       clearTimeout(timeout)
+    //       timeout = setTimeout(() => {
+    //         fun.call(_this, arguments)
+    //       }, delay)
+    //     }
+    //   }
+    // }
+    // window.onmousemove = throttle(test, 2000)
+
+    // function debounce(fun, delay, immediately = true) {
+    //   let timeout = null
+    //   return function() {
+    //     if (immediately && !timeout) fun.call(this, arguments)
+    //     clearTimeout(timeout)
+    //     timeout = setTimeout(() => {
+    //       fun.call(this, arguments)
+    //     }, delay)
+    //   }
+    // }
+
+    function throttle(fun, delay) {
+      let timeout = null
+      let last = null
+      return function() {
+        const _this = this
+        const now = Date.now()
+        if (now - last >= delay) {
+          fun.call(_this, arguments)
+          last = Date.now()
+        } else {
+          clearTimeout(timeout)
+          timeout = setTimeout(() => {
+            fun.call(_this, arguments)
+          }, delay)
+        }
+      }
+    }
+    
+    // function debounce(func, delay, immediately = true) {
+    //   let timeout
+    //   return function() {
+    //     const _this = this
+    //     if (immediately && !timeout) {
+    //       func.call(_this, arguments)
+    //     }
+    //     clearTimeout(timeout)
+    //     timeout = setTimeout(() => {
+    //       func.call(_this, arguments)
+    //       timeout = null
+    //     }, delay)
+    //   }
+    // }
+
+    window.onmousemove = throttle(test, 1000)
+
+  </script>
+</body>
+</html>

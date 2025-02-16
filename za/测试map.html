@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const arr = [{
+      name: 'ysn',
+      child: [{ name: 'yyy', sex: 'girl' }, { name: 'yss', sex: 'boy', hobby: [{ item: 'play basketball' }, { item: 'eat' } ] }]
+    },{
+      name: 'ysx',
+      child: [ { name: 'yxx', sex: 'boy', hobby: [{ item: 'play basketball' }, { item: 'eat' } ] } ]
+    }]
+    // 浅拷贝 object.assign拷贝数组是浅拷贝
+    // const _arr = Object.assign([], arr)
+    
+    // 浅拷贝 扩展运算符 也是浅拷贝
+    // const [..._arr] = arr
+    
+    // JSON 字符串的作用是深拷贝
+    // const _arr = JSON.parse(JSON.stringify(arr))
+
+    // slice(0) 浅拷贝
+    // const _arr = arr.slice(0)
+
+    // 浅拷贝
+    const _arr = arr.concat()
+
+    arr[0].child[0].name = '_yyy'
+
+    console.log(arr[0].child[0].name);
+    console.log(_arr[0].child[0].name);
+
+    console.log('-------------');
+
+    arr[0].name = '_ysn'
+    console.log(arr[0].name);
+    console.log(_arr[0].name);
+  </script>
+</body>
+</html>

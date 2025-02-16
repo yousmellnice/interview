@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //  用defineProperty 定义属性
+    function def (obj, key, val, enumerable) {
+      Object.defineProperty(obj, key, {
+        value: val,
+        enumerable: !!enumerable,
+        writable: true,
+        configurable: true
+      })
+    }
+    const arrayProto = Array.prototype
+    const arrayMethods = Object.create(arrayProto)
+    // console.log(arrayMethods.__proto__)
+
+    // 列出数组需要重写的方法名
+    const methodsToPatch = [
+      'push',
+      'pop',
+      'shift',
+      'unshift',
+      'splice',
+      'sort',
+      'reverse'
+    ]
+
+    methodsToPatch.forEach(function (method) {
+      // 获取原来的数组方法
+      const original = arrayProto[method]
+      // console.log(original)
+      def(arrayMethods, method, function mutator (...args) {
+        // 触发对应的数组原始方法 并且传入参数 args
+        // 获取到结果
+        const result = original.apply(this, args)
+        // const ob = this.__ob__
+        let inserted
+        switch (method) {
+          case 'push':
+          case 'unshift':
+            inserted = args
+            break
+          case 'splice':
+            inserted = args.slice(2)
+            break
+        }
+        // 如果 inserted存在 添加到观察者数组中
+        // if (inserted) ob.observeArray(inserted)
+        // notify change
+        // 将当前数组的变化通知到 订阅者
+        // ob.dep.notify()
+        // 返回结果
+        return result
+      })
+    })
+
+    function copyAugment (target, src, keys) {
+      for (let i = 0, l = keys.length; i < l; i++) {
+        const key = keys[i]
+        // 逐个添加方法
+        def(target, key, src[key])
+      }
+    }
+    const test = [1, 2, 3]
+    const arrayKeys = Object.getOwnPropertyNames(arrayMethods)
+    copyAugment(test, arrayMethods, arrayKeys)
+    const str = methodsToPatch && test
+  </script>
+</body>
+</html>

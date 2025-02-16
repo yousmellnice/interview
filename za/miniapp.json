@@ -1,0 +1,22 @@
+{
+ "miniapp": {
+   "name": [
+     "粤省事",
+     "深i您",
+     "行程卡"
+   ],
+   "粤省事": {
+     "ID": "gh_1ac06b5a8f4e",
+     "URL": "operation_plus/pages/yiqing/daka/user/index/index.html?cityCode=4403"
+   },
+   "深i您": {
+     "ID": "gh_9c23268d5db7",
+     "URL": "pages/mine/todo/code/code.html"
+   },
+   "行程卡": {
+     "ID": "gh_0ed5d82fd775",
+     "URL": "pages/index.html"
+   },
+   "title": "已复制小程序跳转链接"
+ }
+}

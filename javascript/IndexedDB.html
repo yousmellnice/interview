@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // let db,
+    //   request,
+    //   version = 1
+    // request = indexedDB.open('admin', version)
+    // request.onsuccess = event => {
+    //   db = event.target.result
+    // }
+    // let users = {
+    //   username: "007",
+    //   firstName: "James",
+    //   lastName: "Bond",
+    //   password: "foo"
+    // }
+    // request.onupgradeneeded = e => {
+    //   const db = e.target.result
+    //   if (db.objectStoreNames.contains("users")) {
+    //     db.deleteObjectStore('users')
+    //   }
+    //   db.createObjectStore('users', { keyPath: 'username' })
+    // }
+    var db
+    var request = window.indexedDB.open("LinksDB", 1);
+    request.onsuccess = event => {
+      alert('创建indexDB成功')
+      db = event.target.result
+      console.log(db)
+    }
+    request.onupgradeneeded = event => {
+      alert("第一次创建数据库或者更新数据库。")
+      var db = event.target.result 
+      var objectStore = db.createObjectStore("Links", { keyPath: "url" })  
+    }
+    setTimeout(() => {
+      
+      var objectStore = db.createObjectStore("Links", { keyPath: "url" }); 
+      console.log(objectStore)
+    }, 0);
+
+  </script>
+</body>
+
+</html>

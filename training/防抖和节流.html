@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input id="input" value="">
+  <script>
+    // 节流函数
+    // function debounce(fun, delay) {
+    //   let timeout = null
+    //     return function () {
+    //         clearTimeout(timeout)
+    //         // 立即触发
+    //         if (!timeout) {
+    //           fun.call(this, arguments)
+    //         }
+    //         timeout = setTimeout(() => {
+    //             fun.call(this, arguments)
+    //         }, delay)
+    //     }
+    //   }
+
+    // function ajax() {
+    //   console.log(1)
+    // }
+
+    // const input = document.getElementById('input') 
+    // input.addEventListener('input', debounce(ajax, 1000))
+    // window.onmousemove = debounce(ajax, 200)
+
+    // 节流和防抖函数 结合
+    // 因为节流函数有个缺点是 在最后一次执行 如果没有超过一定的时间内 就不会再触发
+    // 那么则可以将节流和防抖结合起来
+    function throttle(fn, delay) {
+      let last = null
+      let timeout = null
+      return function() {
+        let now = +new Date()
+        if (now - last >= delay) {
+          last = now
+          fn.call(this, arguments)
+        }else {
+          clearTimeout(timeout)
+          timeout = setTimeout(() => {
+            fn.call(this, arguments)
+          }, delay)
+        }
+      }
+    }
+    function ajax(params) {
+      console.log(1)
+    }
+    window.onmousemove = throttle(ajax, 2000)
+  </script>
+</body>
+</html>
